@@ -5,6 +5,7 @@ while action != 'quit':
     print(*action_list)
     action = input('What would you like to do? ')
     if action == 'quit':
+        print('Goodbye')
         break
     if action not in action_list:
         print('Invalid action')
