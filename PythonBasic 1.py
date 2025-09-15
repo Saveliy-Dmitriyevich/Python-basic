@@ -28,12 +28,6 @@ def get_number():
             return float(num)
         except ValueError:
             print("Invalid number, try again")
-def memory(num_1, num_2, final_result):
-    memory_action.append(f'{num_1} {action} {num_2} = {final_result} ')
-def memory_another(num_1, final_result):
-    memory_action.append(f'{action} {num_1} = {final_result} ')
-def memory_print():
-    print(*memory_action, sep="\n")
 def precision():
     circle = int(input('Enter number of round '))
     settings['precision'] = circle
@@ -43,6 +37,13 @@ settings ={
     "memory": 0,
     "last_result": 0
 }
+def memory(num_1, num_2, final_result):
+    memory_action.append(f'{num_1} {action} {num_2} = {round(final_result, settings['precision'])} ')
+def memory_another(num_1, final_result):
+    memory_action.append(f'{action} {num_1} = {round(final_result, settings['precision'])} ')
+def memory_print():
+    print(*memory_action, sep="\n")
+
 operations = {
     "add": (add, 2 ),
     "subtract": (subtract, 2),
