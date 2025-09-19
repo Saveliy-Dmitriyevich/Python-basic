@@ -1,3 +1,7 @@
+from colorama import Fore, Style, init
+init()
+
+
 memory_action = []
 
 def add(num_1, num_2):
@@ -10,7 +14,7 @@ def divide(num_1, num_2):
     try:
         return num_1 / num_2
     except ZeroDivisionError:
-        print("Division by zero, try again")
+        print(Fore.RED + "Division by zero, try again" + Style.RESET_ALL)
 def square(num_1):
     return num_1 ** 2
 def cube(num_1):
@@ -55,7 +59,7 @@ operations = {
     "cube": (cube, 1),
 }
 
-action_list = ['add', 'subtract', 'multiply', 'divide', 'quit', 'memory', 'sqrt', 'square','cube', 'mod', 'precision','M+','MR','MC']
+action_list = ['ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'QUIT', 'MEMORY', 'SQRT', 'SQUARE','CUBE', 'MOD', 'PRECISION','M+','MR','MC']
 action = ''
 
 while action != 'quit':
@@ -70,16 +74,17 @@ while action != 'quit':
         if args == 1:
             num_1 = get_number()
             final_result = func(num_1)
-            print(round(final_result, settings['precision']))
+            print(Fore.GREEN + str(round(final_result, settings['precision']))  + Style.RESET_ALL)
             settings['last_result'] = final_result
             memory_another(num_1, final_result)
         elif args == 2:
             num_1 = get_number()
             num_2 = get_number()
             final_result = func(num_1, num_2)
-            print(round(final_result, settings['precision']))
-            settings['last_result'] = final_result
-            memory(num_1, num_2, final_result)
+            if func != divide:
+                print(Fore.GREEN + str(round(final_result, settings['precision'])) + Style.RESET_ALL)
+                settings['last_result'] = final_result
+                memory(num_1, num_2, final_result)
     elif action.strip().lower() == 'precision':
         precision()
     elif action.strip().lower() == 'memory':
@@ -90,5 +95,5 @@ while action != 'quit':
         settings['memory'] = 0
         settings['last_result'] = 0
     elif action not in action_list:
-        print('Invalid action')
+        print(Fore.RED +'Invalid action'+ Style.RESET_ALL)
 
